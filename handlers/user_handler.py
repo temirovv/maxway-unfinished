@@ -1,3 +1,5 @@
+import os
+
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
@@ -58,7 +60,10 @@ async def choose_product_handler(message: Message, state: FSMContext):
         product = baza.select_product_by_name(text)
         p_id, name, weight, ingredients, price, image, category_id = product
         mtext = f"""{name}\nvazni: {weight}\ntarkibi: {ingredients}\nnarxi: {price}"""
-        file = FSInputFile(path=image)
+        
+        file_path = os.path.join('downloads', 'images', image)
+        print(f"{file_path=}")
+        file = FSInputFile(path=file_path)
         await message.answer_photo(photo=file, caption=mtext, reply_markup=get_plus_minus_menu())
         data = {
             'count': 1,

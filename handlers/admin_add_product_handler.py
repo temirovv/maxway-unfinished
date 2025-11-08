@@ -100,7 +100,7 @@ async def product_name_handler(message: Message, state: FSMContext):
     await bot.download(file, destination=dest_path)
 
     # 5) Holatga saqlash (xohlasangiz nisbiy yo‘lni)
-    await state.update_data(photo=str(dest_path.relative_to(base_dir)))
+    await state.update_data(photo=filename)
     await message.answer("✅ Rasm saqlandi.")
     await message.answer(
         "Barcha ma'lumotlar to'g'rimi",
